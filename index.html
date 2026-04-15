@@ -1,0 +1,194 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  .wa-page{font-family:'Plus Jakarta Sans',var(--font-sans),sans-serif;background:var(--color-background-tertiary);min-height:600px}
+  .wa-header{background:#075E54;color:#fff;padding:1.5rem 1.25rem 2.5rem;position:relative;overflow:hidden}
+  .wa-header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:28px;background:var(--color-background-tertiary);border-radius:28px 28px 0 0}
+  .brand-row{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem}
+  .wa-logo{width:36px;height:36px;background:rgba(255,255,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .wa-logo svg{width:20px;height:20px;fill:#fff}
+  .brand-name{font-size:15px;font-weight:500;opacity:.9}
+  .wa-header h1{font-size:22px;font-weight:600;color:#fff;line-height:1.25;margin-bottom:6px}
+  .wa-header p{font-size:13px;opacity:.8;line-height:1.5}
+  .form-wrap{padding:1.5rem 1.25rem}
+  .field{margin-bottom:1rem}
+  .field label{display:block;font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+  .field input,.field select,.field textarea{width:100%;padding:10px 12px;font-family:inherit;font-size:14px;background:var(--color-background-primary);border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);color:var(--color-text-primary);outline:none;transition:border-color .15s}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:#075E54;box-shadow:0 0 0 2px rgba(7,94,84,.12)}
+  .field textarea{resize:none;height:90px;line-height:1.5}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .urgency-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .urgency-btn{padding:9px 6px;border-radius:var(--border-radius-md);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-family:inherit;font-size:12px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;text-align:center;transition:all .12s}
+  .urgency-btn.sel-low{background:#E1F5EE;border-color:#0F6E56;color:#0F6E56}
+  .urgency-btn.sel-med{background:#FAEEDA;border-color:#854F0B;color:#854F0B}
+  .urgency-btn.sel-high{background:#FCEBEB;border-color:#A32D2D;color:#A32D2D}
+  .emoji-ic{font-size:16px;display:block;margin-bottom:2px}
+  .send-btn{width:100%;padding:13px;background:#075E54;color:#fff;border:none;border-radius:var(--border-radius-md);font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:1.25rem;transition:background .15s}
+  .send-btn:hover{background:#064d45}
+  .send-btn:active{transform:scale(.99)}
+  .send-btn svg{width:18px;height:18px;fill:#fff;flex-shrink:0}
+  .send-btn:disabled{background:#9FE1CB;cursor:not-allowed}
+  .privacy-note{text-align:center;font-size:11px;color:var(--color-text-tertiary);margin-top:12px;line-height:1.5}
+  .divider{height:.5px;background:var(--color-border-tertiary);margin:1rem 0}
+  .success-state{display:none;text-align:center;padding:2rem 1.5rem}
+  .success-icon{width:56px;height:56px;background:#E1F5EE;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+  .success-icon svg{width:28px;height:28px;fill:#0F6E56}
+  .success-state h2{font-size:18px;margin-bottom:6px;color:var(--color-text-primary)}
+  .success-state p{font-size:13px;color:var(--color-text-secondary)}
+  .ticket-id-badge{display:inline-block;background:#E1F5EE;color:#085041;font-size:13px;font-weight:500;padding:6px 14px;border-radius:20px;margin:10px 0 16px}
+  .status-bar{font-size:12px;color:var(--color-text-tertiary);margin-top:8px;min-height:16px;text-align:center}
+  .error-msg{color:#A32D2D;font-size:12px;margin-top:4px;display:none}
+</style>
+
+<div class="wa-page">
+  <div class="wa-header">
+    <div class="brand-row">
+      <div class="wa-logo">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <span class="brand-name">Soporte Técnico</span>
+    </div>
+    <h1>¿Cómo podemos ayudarte?</h1>
+    <p>Tu ticket se guardará automáticamente y te responderemos por WhatsApp.</p>
+  </div>
+
+  <div id="form-section" class="form-wrap">
+    <div class="field-row">
+      <div class="field">
+        <label>Nombre *</label>
+        <input type="text" id="f-nombre" placeholder="Tu nombre">
+        <div class="error-msg" id="err-nombre">Campo requerido</div>
+      </div>
+      <div class="field">
+        <label>Empresa / área</label>
+        <input type="text" id="f-empresa" placeholder="Opcional">
+      </div>
+    </div>
+    <div class="field">
+      <label>Tipo de problema</label>
+      <select id="f-tipo">
+        <option value="">Selecciona una categoría...</option>
+        <option value="Hardware">💻 Hardware (PC, impresora, etc.)</option>
+        <option value="Internet / Red">🌐 Internet / Red</option>
+        <option value="Acceso / Contraseñas">🔐 Acceso / Contraseñas</option>
+        <option value="Software / App">📦 Software / Aplicación</option>
+        <option value="Impresión">🖨️ Impresión</option>
+        <option value="Correo">📧 Correo electrónico</option>
+        <option value="Otro">🔧 Otro</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Descripción del problema *</label>
+      <textarea id="f-desc" placeholder="Describe qué está pasando, desde cuándo, y qué has intentado..."></textarea>
+      <div class="error-msg" id="err-desc">Campo requerido</div>
+    </div>
+    <div class="field">
+      <label>Urgencia</label>
+      <div class="urgency-grid">
+        <button class="urgency-btn sel-low" id="urg-baja" onclick="setUrgencia('Baja')"><span class="emoji-ic">🟢</span>Baja</button>
+        <button class="urgency-btn" id="urg-media" onclick="setUrgencia('Media')"><span class="emoji-ic">🟡</span>Media</button>
+        <button class="urgency-btn" id="urg-alta" onclick="setUrgencia('Alta')"><span class="emoji-ic">🔴</span>Alta</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <button class="send-btn" id="send-btn" onclick="enviarTicket()">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enviar ticket por WhatsApp
+    </button>
+    <div class="status-bar" id="status-bar"></div>
+    <p class="privacy-note">Se guardará en tu sistema y se abrirá WhatsApp con el resumen.</p>
+  </div>
+
+  <div id="success-section" class="success-state">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </div>
+    <h2>¡Ticket registrado!</h2>
+    <div class="ticket-id-badge" id="success-id">TK-0000</div>
+    <p>Guardado en Sheets y enviado por WhatsApp.<br>Te responderemos pronto.</p>
+    <button class="send-btn" style="margin-top:1.5rem" onclick="resetForm()">Enviar otro ticket</button>
+  </div>
+</div>
+
+<script>
+  // ⚠️ REEMPLAZA ESTAS DOS VARIABLES:
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzef3-iL7hz26ysD7HMSAT4hW8aqh7kgq55m62KfqPSZMBRBddisvliSEkzc_uhUa_O/exec';
+  const TU_NUMERO_WA    = '573102041457';
+
+  let urgencia = 'Baja';
+
+  function setUrgencia(n) {
+    urgencia = n;
+    document.querySelectorAll('.urgency-btn').forEach(b => b.className = 'urgency-btn');
+    if (n==='Baja')  document.getElementById('urg-baja').classList.add('sel-low');
+    if (n==='Media') document.getElementById('urg-media').classList.add('sel-med');
+    if (n==='Alta')  document.getElementById('urg-alta').classList.add('sel-high');
+  }
+
+  function genId() {
+    const d = new Date();
+    return 'TK-' + String(d.getDate()).padStart(2,'0') + String(d.getMonth()+1).padStart(2,'0') +
+           String(d.getHours()).padStart(2,'0') + String(d.getMinutes()).padStart(2,'0');
+  }
+
+  function setStatus(msg, color) {
+    const s = document.getElementById('status-bar');
+    s.textContent = msg;
+    s.style.color = color || 'var(--color-text-tertiary)';
+  }
+
+  async function enviarTicket() {
+    const nombre = document.getElementById('f-nombre').value.trim();
+    const desc   = document.getElementById('f-desc').value.trim();
+    let valid = true;
+
+    document.getElementById('err-nombre').style.display = nombre ? 'none' : 'block';
+    document.getElementById('err-desc').style.display   = desc   ? 'none' : 'block';
+    if (!nombre || !desc) return;
+
+    const empresa = document.getElementById('f-empresa').value.trim();
+    const tipo    = document.getElementById('f-tipo').value || 'Sin categoría';
+    const id      = genId();
+
+    const payload = { id, nombre, empresa, tipo, urgencia, descripcion: desc };
+
+    const btn = document.getElementById('send-btn');
+    btn.disabled = true;
+    setStatus('Guardando en Sheets...');
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      setStatus('¡Guardado! Abriendo WhatsApp...');
+    } catch(e) {
+      setStatus('No se pudo guardar en Sheets, pero abriremos WhatsApp igual.', '#854F0B');
+    }
+
+    const urg = urgencia==='Alta' ? '🔴 ALTA' : urgencia==='Media' ? '🟡 Media' : '🟢 Baja';
+    let msg = `🎫 *NUEVO TICKET DE SOPORTE*\nID: ${id}\n──────────────────\n👤 *Cliente:* ${nombre}`;
+    if (empresa) msg += ` · ${empresa}`;
+    msg += `\n🗂️ *Tipo:* ${tipo}\n⚡ *Urgencia:* ${urg}\n──────────────────\n📝 *Descripción:*\n${desc}`;
+
+    setTimeout(() => {
+      window.open(`https://wa.me/${TU_NUMERO_WA}?text=${encodeURIComponent(msg)}`, '_blank');
+      document.getElementById('success-id').textContent = id;
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('success-section').style.display = 'block';
+      btn.disabled = false;
+    }, 800);
+  }
+
+  function resetForm() {
+    ['f-nombre','f-empresa','f-desc'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-tipo').value = '';
+    setUrgencia('Baja');
+    setStatus('');
+    document.getElementById('form-section').style.display = 'block';
+    document.getElementById('success-section').style.display = 'none';
+  }
+</script>
